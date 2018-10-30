@@ -19,9 +19,6 @@ public class Clazz {
     @JoinColumn(name="teacher_id", foreignKey=@ForeignKey(name = "fk_clazz_teacher_id"))
     private Teacher teacher;
 
-    @NotNull
-    private int numberOfStudents;
-
     @OneToMany(mappedBy = "clazz")
     private List<Student> students;
 

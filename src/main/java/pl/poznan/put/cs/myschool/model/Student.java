@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -24,9 +25,9 @@ public class Student {
     @NotNull
     private String surname;
 
-    @OneToOne(mappedBy = "student")
-    private Grade grade;
+    @NotNull
+    private Date dateOfBirth;
 
     @OneToOne(mappedBy = "student")
-    private Presence lesson;
+    private Grade grade;
 }

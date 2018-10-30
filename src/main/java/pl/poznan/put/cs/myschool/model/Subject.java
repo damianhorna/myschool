@@ -1,6 +1,7 @@
 package pl.poznan.put.cs.myschool.model;
 
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,13 +10,5 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Subject {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @NotNull
-    @Column(unique=true)
     private String name;
-
-    @OneToOne(mappedBy = "subject")
-    private Teacher teacher;
 }

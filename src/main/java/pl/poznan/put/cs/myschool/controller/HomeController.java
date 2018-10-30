@@ -41,7 +41,6 @@ public class HomeController {
         Teacher t = new Teacher();
         t.setName("Jan");
         t.setSurname("Kowalski");
-        t.setSubject(s);
 
         teacherRepository.save(t);
     }

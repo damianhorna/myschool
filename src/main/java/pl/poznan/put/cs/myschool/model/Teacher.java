@@ -5,6 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,7 +17,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(mappedBy="teacher")
+    @OneToOne(mappedBy = "teacher")
     private Clazz clazz;
 
     @NotNull
@@ -24,9 +27,15 @@ public class Teacher {
     private String surname;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="subject_id",foreignKey=@ForeignKey(name = "fk_teacher_subject_id"))
-    private Subject subject;
+    private BigDecimal salary;
+
+    @NotNull
+    private Date dateOfEmployment;
+
+    @JoinTable(name = "teaching", joinColumns = {@JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "fk_teaching_teacher_id"))},
+            inverseJoinColumns = {@JoinColumn(name = "subject_name", foreignKey = @ForeignKey(name = "fk_teaching_subject_name"))})
+    @ManyToMany
+    private List<Subject> subjects;
 
     @OneToOne(mappedBy = "teacher")
     private Grade grade;

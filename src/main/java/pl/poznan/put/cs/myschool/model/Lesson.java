@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,10 +38,15 @@ public class Lesson {
     @NotNull
     private Date date;
 
+    @NotNull
+    private String topic;
+
     @OneToOne(mappedBy = "lesson")
     private Grade grade;
 
 
-    @OneToOne(mappedBy = "lesson")
-    private Presence presence;
+    @JoinTable(name = "presence", joinColumns = {@JoinColumn(name = "lesson_id", foreignKey = @ForeignKey(name = "fk_presence_lesson_id"))},
+            inverseJoinColumns = {@JoinColumn(name = "student_id", foreignKey = @ForeignKey(name = "fk_presence_student_id"))})
+    @ManyToMany
+    private List<Student> presentStudents;
 }
