@@ -1,10 +1,10 @@
 package pl.poznan.put.cs.myschool.model;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Entity
@@ -16,6 +16,6 @@ public class Classroom {
     @NotNull
     private int numberOfSeats;
 
-    @OneToOne(mappedBy = "classroom")
-    private Lesson lesson;
+    @OneToMany(mappedBy = "classroom")
+    private List<Lesson> lessons;
 }

@@ -15,12 +15,15 @@ public class Clazz {
     private Long id;
 
     @NotNull
-    @OneToOne(fetch=FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="teacher_id", foreignKey=@ForeignKey(name = "fk_clazz_teacher_id"))
     private Teacher teacher;
 
     @OneToMany(mappedBy = "clazz")
     private List<Student> students;
+
+    @OneToMany(mappedBy = "clazz")
+    private List<Lesson> lessons;
 
     @NotNull
     @Column(unique=true)

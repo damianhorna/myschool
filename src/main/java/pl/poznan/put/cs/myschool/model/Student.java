@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -22,12 +23,15 @@ public class Student {
     @NotNull
     private String name;
 
+    @ManyToMany(mappedBy = "presentStudents")
+    private List<Lesson> lessons;
+
     @NotNull
     private String surname;
 
     @NotNull
     private Date dateOfBirth;
 
-    @OneToOne(mappedBy = "student")
-    private Grade grade;
+    @OneToMany(mappedBy = "student")
+    private List<Grade> grades;
 }

@@ -17,8 +17,8 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(mappedBy = "teacher")
-    private Clazz clazz;
+    @OneToMany(mappedBy = "teacher")
+    private List<Clazz> clazzes;
 
     @NotNull
     private String name;
@@ -33,10 +33,10 @@ public class Teacher {
     private Date dateOfEmployment;
 
     @JoinTable(name = "teaching", joinColumns = {@JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "fk_teaching_teacher_id"))},
-            inverseJoinColumns = {@JoinColumn(name = "subject_name", foreignKey = @ForeignKey(name = "fk_teaching_subject_name"))})
+            inverseJoinColumns = {@JoinColumn(name = "subject_id", foreignKey = @ForeignKey(name = "fk_teaching_subject_id"))})
     @ManyToMany
     private List<Subject> subjects;
 
-    @OneToOne(mappedBy = "teacher")
-    private Grade grade;
+    @OneToMany(mappedBy = "teacher")
+    private List<Grade> grades;
 }
