@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {SubjectService} from "../shared/subject/subject.service";
+import {Component, OnInit} from '@angular/core';
+import {SubjectService} from "../service/subject/subject.service";
 
 @Component({
   selector: 'app-subject-list',
@@ -10,13 +10,16 @@ export class SubjectListComponent implements OnInit {
 
   subjects: Array<any>;
 
-  constructor(private subjectService : SubjectService) { }
+  constructor(private subjectService: SubjectService) {
+  }
 
   ngOnInit() {
     this.subjectService.getAll().subscribe(data => {
-      console.log(data);
       this.subjects = data._embedded.subjects;
     });
   }
 
+  setEditedSubject(subject: any) {
+    this.subjectService.setEditedSubject(subject)
+  }
 }

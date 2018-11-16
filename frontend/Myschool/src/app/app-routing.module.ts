@@ -14,7 +14,7 @@ const routes: Routes = [
     component: SubjectEditComponent
   },
   {
-    path: 'subject-edit/:id',
+    path: 'subject-edit',
     component: SubjectEditComponent
   }
 ];

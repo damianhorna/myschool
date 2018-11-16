@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SubjectService } from '../shared/subject/subject.service';
-import { NgForm } from '@angular/forms';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
+import {SubjectService} from "../service/subject/subject.service";
 
 @Component({
   selector: 'app-subject-edit',
@@ -11,44 +11,28 @@ import { NgForm } from '@angular/forms';
 })
 export class SubjectEditComponent implements OnInit {
   subject: any = {};
-  sub: Subscription;
+
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private subjectService: SubjectService,) { }
-
-  ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.subjectService.get(id).subscribe((subject: any) => {
-          if (subject) {
-            this.subject = subject;
-            this.subject.href = subject._links.self.href;
-          } else {
-            console.log(`Subject with id '${id}' not found, returning to list`);
-            this.gotoList();
-          }
-        });
-      }
-    });
+              private subjectService: SubjectService) {
   }
 
-  ngOnDestroy() {
-    this.sub.unsubscribe();
+  ngOnInit() {
+    this.subject = this.subjectService.editedSubject;
   }
 
   gotoList() {
     this.router.navigate(['/subject-list']);
   }
 
-  save(form: NgForm) {
-    this.subjectService.save(form).subscribe(result => {
+  save() {
+    this.subjectService.save().subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
 
-  remove(href) {
-    this.subjectService.remove(href).subscribe(result => {
+  remove() {
+    this.subjectService.remove().subscribe(result => {
       this.gotoList();
     }, error => console.error(error));
   }
