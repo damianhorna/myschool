@@ -1,0 +1,13 @@
+<mat-card>
+  <mat-card-title>Subject List</mat-card-title>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let subject of subjects">
+        <h3 mat-line>
+          <a mat-button [routerLink]="['/subject-edit', subject.id]">{{subject.name}}</a>
+        </h3>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+  <button mat-fab color="primary" [routerLink]="['/subject-add']">Add</button>
+</mat-card>
