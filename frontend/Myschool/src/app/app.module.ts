@@ -15,19 +15,22 @@ import {
   MatSidenavModule,
   MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatPaginatorModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {SubjectAddDialog} from "./dialogs/subject/subject-add.component";
+import { ClassroomListComponent } from './classroom-list/classroom-list/classroom-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SubjectListComponent,
     SidenavComponent,
-    SubjectAddDialog
+    SubjectAddDialog,
+    ClassroomListComponent
   ],
   entryComponents: [SubjectAddDialog],
   imports: [
@@ -49,6 +52,7 @@ import {SubjectAddDialog} from "./dialogs/subject/subject-add.component";
     MatTableModule,
     MatSortModule,
     MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

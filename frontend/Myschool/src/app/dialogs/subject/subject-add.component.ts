@@ -1,7 +1,11 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {DialogData} from "../../subject-list/subject-list.component";
 import {SubjectService} from "../../service/subject/subject.service";
+
+export interface SubjectData {
+  name: string;
+  href: string;
+}
 
 @Component({
   selector: 'subject-add-dialog',
@@ -9,20 +13,33 @@ import {SubjectService} from "../../service/subject/subject.service";
 })
 export class SubjectAddDialog {
 
-  name: string;
+  subject: { name: '', href: '' };
+  errorMsg: string;
+  error = false;
 
   constructor(
     public dialogRef: MatDialogRef<SubjectAddDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private subjectService: SubjectService) {}
+    @Inject(MAT_DIALOG_DATA) public subjectData: SubjectData,
+    private subjectService: SubjectService) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  addSubject(){
-    this.subjectService.save({name : this.name}).subscribe(result => {
-      console.log('subject addded')
-    }, error => console.error(error));
+  addSubject() {
+    this.error = false;
+    if(this.subjectData.name.match(/^\s*$/)){
+      this.error = true;
+      this.errorMsg = 'subject name may not be empty';
+    } else {
+      this.subjectService.save({name: this.subjectData.name.trim(), href: this.subjectData.href}).subscribe(result => {
+        this.dialogRef.close();
+      }, error => {
+        this.error = true;
+        this.errorMsg = 'subject with given name already exists';
+        console.log(error)
+      });
+    }
   }
 }

@@ -1,7 +1,7 @@
 table {
   width: 100%;
-  margin: 10px;
   text-align: left;
+  margin-bottom: 0;
 }
 
 th.mat-sort-header-sorted {
@@ -10,6 +10,11 @@ th.mat-sort-header-sorted {
 
 th{
   justify-content: center;
+}
+
+mat-paginator{
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
 .green-background{

@@ -17,6 +17,7 @@ public class Subject {
     private Long id;
 
     @NotNull
+    @Column(unique=true)
     private String name;
 
     @ManyToMany(mappedBy = "subjects")

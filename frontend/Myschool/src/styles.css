@@ -29,3 +29,7 @@ h1 {
 .green-background{
   background-color: seagreen;
 }
+
+.error-msg{
+  color: darkred;
+}
