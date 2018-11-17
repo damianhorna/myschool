@@ -1,23 +1,35 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
-import { SubjectListComponent } from './subject-list/subject-list.component';
-import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatTableModule, MatSortModule} from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SubjectEditComponent } from './subject-edit/subject-edit.component';
-import { FormsModule } from '@angular/forms';
-import { SidenavComponent } from './sidenav/sidenav.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import {SubjectListComponent} from './subject-list/subject-list.component';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSidenavModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {SidenavComponent} from './sidenav/sidenav.component';
+import {SubjectAddDialog} from "./dialogs/subject/subject-add.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SubjectListComponent,
-    SubjectEditComponent,
     SidenavComponent,
+    SubjectAddDialog
   ],
+  entryComponents: [SubjectAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,9 +47,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     MatSidenavModule,
     MatIconModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

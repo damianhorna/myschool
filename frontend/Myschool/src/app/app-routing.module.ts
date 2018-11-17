@@ -1,31 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {SubjectListComponent} from "./subject-list/subject-list.component";
-import {SubjectEditComponent} from "./subject-edit/subject-edit.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {SidenavComponent} from "./sidenav/sidenav.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/nav', pathMatch: 'full' },
-  {
-    path: 'subject-list',
-    component: SubjectListComponent
-  },
-  {
-    path: 'subject-add',
-    component: SubjectEditComponent
-  },
-  {
-    path: 'subject-edit',
-    component: SubjectEditComponent
-  },
-  {
-    path: 'nav',
-    component: SidenavComponent
-  }
+  {path: '', component: SidenavComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

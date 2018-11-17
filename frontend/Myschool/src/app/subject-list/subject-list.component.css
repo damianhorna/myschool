@@ -1,7 +1,17 @@
 table {
   width: 100%;
+  margin: 10px;
+  text-align: left;
 }
 
 th.mat-sort-header-sorted {
   color: black;
+}
+
+th{
+  justify-content: center;
+}
+
+.green-background{
+  background-color: seagreen;
 }

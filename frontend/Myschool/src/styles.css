@@ -3,5 +3,29 @@
 
 body {
   margin: 0;
+  color: midnightblue;
   font-family: Roboto, sans-serif;
+}
+h1 {
+  color: midnightblue;
+}
+
+.green-icon {
+  color: seagreen;
+}
+
+.red-icon{
+  color: darkred;
+}
+
+.blue-icon{
+  color: midnightblue;
+}
+
+.lavender-icon{
+  color: lavender;
+}
+
+.green-background{
+  background-color: seagreen;
 }
