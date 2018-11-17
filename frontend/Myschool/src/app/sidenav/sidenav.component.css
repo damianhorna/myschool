@@ -1,0 +1,28 @@
+.sidenav-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.sidenav-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  background-color: lavender;
+}
+
+.sidenav-drawer {
+  padding: 20px;
+  background-color: midnightblue;
+  color: beige;
+  display: flex;
+  flex-direction: column;
+}
+
+#menu-icon{
+  top: 5px;
+  background-color: beige;
+}
+
+.sidenav-menu-option{
+  display: flex;
+}

@@ -1,0 +1,26 @@
+<mat-drawer-container class="sidenav-container" autosize>
+  <mat-drawer #drawer class="sidenav-drawer" mode="side">
+    <p>Myschool</p>
+    <a mat-button (click)="activateScreen(1)" class="sidenav-menu-option" >Subjects</a>
+    <a mat-button (click)="activateScreen(2)" class="sidenav-menu-option" >Students</a>
+    <a mat-button (click)="activateScreen(3)" class="sidenav-menu-option" >Teachers</a>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <div id="menu-icon">
+      <button type="button" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div *ngIf="render[0]">
+      Welcome to Myschool App!
+    </div>
+    <div *ngIf="render[1]">
+      <app-subject-list></app-subject-list>
+    </div>
+    <div *ngIf="render[2]">
+      Students
+    </div>
+  </div>
+
+</mat-drawer-container>
