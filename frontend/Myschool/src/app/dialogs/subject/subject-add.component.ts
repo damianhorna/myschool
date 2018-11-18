@@ -13,7 +13,6 @@ export interface SubjectData {
 })
 export class SubjectAddDialog {
 
-  subject: { name: '', href: '' };
   errorMsg: string;
   error = false;
 

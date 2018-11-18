@@ -22,7 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {SubjectAddDialog} from "./dialogs/subject/subject-add.component";
-import { ClassroomListComponent } from './classroom-list/classroom-list/classroom-list.component';
+import { ClassroomListComponent } from './classroom-list/classroom-list.component';
+import {ClassroomAddDialog} from "./dialogs/classroom/classroom-add.component";
 
 @NgModule({
   declarations: [
@@ -30,9 +31,10 @@ import { ClassroomListComponent } from './classroom-list/classroom-list/classroo
     SubjectListComponent,
     SidenavComponent,
     SubjectAddDialog,
-    ClassroomListComponent
+    ClassroomListComponent,
+    ClassroomAddDialog
   ],
-  entryComponents: [SubjectAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,

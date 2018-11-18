@@ -57,7 +57,6 @@ export class SubjectListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       this.initialize()
     });
   }

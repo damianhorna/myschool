@@ -29,7 +29,6 @@ export class SubjectService {
   }
 
   remove(href: string) {
-    console.log("removing", href);
     return this.http.delete(href);
   }
 }

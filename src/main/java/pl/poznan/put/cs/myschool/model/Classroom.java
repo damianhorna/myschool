@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 @Entity
 public class Classroom {
-
     @Id
-    private long number;
+    @Column(unique=true)
+    private Long number;
 
     @NotNull
     private int numberOfSeats;
