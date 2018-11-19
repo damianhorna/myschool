@@ -10,6 +10,10 @@ import java.util.List;
 @Entity
 public class Classroom {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @NotNull
     @Column(unique=true)
     private Long number;
 

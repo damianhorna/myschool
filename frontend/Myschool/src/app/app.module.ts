@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import {SubjectListComponent} from './subject-list/subject-list.component';
+import {SubjectListComponent} from './components/subjects/subject-list.component';
 import {
   MatButtonModule,
   MatCardModule,
@@ -20,10 +20,10 @@ import {
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
-import {SidenavComponent} from './sidenav/sidenav.component';
-import {SubjectAddDialog} from "./dialogs/subject/subject-add.component";
-import { ClassroomListComponent } from './classroom-list/classroom-list.component';
-import {ClassroomAddDialog} from "./dialogs/classroom/classroom-add.component";
+import {SidenavComponent} from './components/sidenav/sidenav.component';
+import {SubjectAddDialog} from "./components/subjects/dialogs/add/subject-add.component";
+import { ClassroomListComponent } from './components/classrooms/classroom-list.component';
+import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-add.component";
 
 @NgModule({
   declarations: [

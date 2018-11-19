@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {ClassroomService} from "../../service/classroom/classroom.service";
+import {ClassroomService} from "../../../../service/classroom/classroom.service";
 
 export interface ClassroomData {
   number: number;
@@ -10,7 +10,7 @@ export interface ClassroomData {
 
 @Component({
   selector: 'classroom-add-dialog',
-  templateUrl: 'classroom-add-dialog.html',
+  templateUrl: './classroom-add-dialog.html',
 })
 export class ClassroomAddDialog {
 

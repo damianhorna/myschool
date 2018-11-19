@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {ClassroomAddDialog} from "../dialogs/classroom/classroom-add.component";
-import {ClassroomService} from "../service/classroom/classroom.service";
+import {ClassroomAddDialog} from "./dialogs/add/classroom-add.component";
+import {ClassroomService} from "../../service/classroom/classroom.service";
 
 export interface PeriodicElement {
   number: number;

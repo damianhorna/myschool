@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {SubjectService} from "../service/subject/subject.service";
+import {SubjectService} from "../../service/subject/subject.service";
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {SubjectAddDialog} from "../dialogs/subject/subject-add.component";
+import {SubjectAddDialog} from "./dialogs/add/subject-add.component";
 
 export interface PeriodicElement {
   name: string;

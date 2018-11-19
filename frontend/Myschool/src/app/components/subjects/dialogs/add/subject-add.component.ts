@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {SubjectService} from "../../service/subject/subject.service";
+import {SubjectService} from "../../../../service/subject/subject.service";
 
 export interface SubjectData {
   name: string;
@@ -9,7 +9,7 @@ export interface SubjectData {
 
 @Component({
   selector: 'subject-add-dialog',
-  templateUrl: 'subject-add-dialog.html',
+  templateUrl: './subject-add-dialog.html',
 })
 export class SubjectAddDialog {
 
