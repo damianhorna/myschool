@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{classroomData.href ? 'Edit' : 'Add'}} classroom</h1>
 <div mat-dialog-content>
-  <p>Provide an unique classroom number</p>
+  <p>Provide information about the classroom</p>
   <input type="hidden" name="href" [(ngModel)]="classroomData.href">
   <mat-form-field>
     <input matInput required placeholder="Classroom number" [(ngModel)]="classroomData.number">
@@ -9,6 +9,7 @@
   <mat-form-field>
     <input matInput required placeholder="Number of seats" [(ngModel)]="classroomData.numberOfSeats">
   </mat-form-field>
+  <div *ngIf="negativeNumberOfSeatsError" class="error-msg">{{errorMsg}}</div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

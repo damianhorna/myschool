@@ -7,9 +7,9 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ClassroomService {
 
+
   public API = '//localhost:8080';
   public CLASSROOM_API = this.API + '/classrooms';
-
   constructor(private http: HttpClient) {
   }
 
@@ -20,11 +20,8 @@ export class ClassroomService {
   save(classroom): Observable<any> {
     let result: Observable<Object>;
     if (classroom['href']) {
-      console.log('putting');
-      console.log(classroom['href']);
       result = this.http.put(classroom.href, classroom);
     } else {
-      console.log('posting', classroom);
       result = this.http.post(this.CLASSROOM_API, classroom);
     }
     return result;

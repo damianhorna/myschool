@@ -1,6 +1,7 @@
 package pl.poznan.put.cs.myschool.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Teacher {
     private BigDecimal salary;
 
     @NotNull
+    @JsonFormat(pattern="MM/dd/yyyy")
     private Date dateOfEmployment;
 
     @JoinTable(name = "teaching", joinColumns = {@JoinColumn(name = "teacher_id", foreignKey = @ForeignKey(name = "fk_teaching_teacher_id"))},

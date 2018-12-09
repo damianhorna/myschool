@@ -8,22 +8,26 @@ import {SubjectListComponent} from './components/subjects/subject-list.component
 import {
   MatButtonModule,
   MatCardModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatPaginatorModule,
   MatSidenavModule,
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatPaginatorModule
+  MatNativeDateModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {SidenavComponent} from './components/sidenav/sidenav.component';
 import {SubjectAddDialog} from "./components/subjects/dialogs/add/subject-add.component";
-import { ClassroomListComponent } from './components/classrooms/classroom-list.component';
+import {ClassroomListComponent} from './components/classrooms/classroom-list.component';
 import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-add.component";
+import {TeacherListComponent} from './components/teachers/teacher-list.component';
+import {TeacherAddDialog} from "./components/teachers/dialogs/add/teacher-add.component";
 
 @NgModule({
   declarations: [
@@ -32,9 +36,11 @@ import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-
     SidenavComponent,
     SubjectAddDialog,
     ClassroomListComponent,
-    ClassroomAddDialog
+    ClassroomAddDialog,
+    TeacherListComponent,
+    TeacherAddDialog
   ],
-  entryComponents: [SubjectAddDialog, ClassroomAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -54,7 +60,9 @@ import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-
     MatTableModule,
     MatSortModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]

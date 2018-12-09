@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>{{subjectData.href ? 'Edit' : 'Add'}} subject</h1>
 <div mat-dialog-content>
-  <p>Provide a name of subject</p>
+  <p>Provide information about the subject</p>
   <input type="hidden" name="href" [(ngModel)]="subjectData.href">
   <mat-form-field>
     <input matInput required placeholder="Subject Name" [(ngModel)]="subjectData.name">
