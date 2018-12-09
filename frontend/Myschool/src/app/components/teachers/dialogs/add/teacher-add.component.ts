@@ -43,7 +43,7 @@ export class TeacherAddDialog {
     } else if (!this.validationService.isNumber(this.teacherData.salary)) {
       this.error = true;
       this.errorMsg = 'salary must be a positive number';
-    } else if(this.teacherData.dateOfEmployment == null){
+    } else if (this.teacherData.dateOfEmployment == null) {
       this.error = true;
       this.errorMsg = 'provide a date';
       return false;

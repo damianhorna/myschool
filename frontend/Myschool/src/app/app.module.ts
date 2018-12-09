@@ -28,6 +28,9 @@ import {ClassroomListComponent} from './components/classrooms/classroom-list.com
 import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-add.component";
 import {TeacherListComponent} from './components/teachers/teacher-list.component';
 import {TeacherAddDialog} from "./components/teachers/dialogs/add/teacher-add.component";
+import {SubjectsPipe} from "./pipes/SubjectsPipe";
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import {TeacherAddDialog} from "./components/teachers/dialogs/add/teacher-add.co
     ClassroomListComponent,
     ClassroomAddDialog,
     TeacherListComponent,
-    TeacherAddDialog
+    TeacherAddDialog,
+    SubjectsPipe
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog],
   imports: [
@@ -62,7 +66,8 @@ import {TeacherAddDialog} from "./components/teachers/dialogs/add/teacher-add.co
     MatDialogModule,
     MatPaginatorModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
