@@ -46,8 +46,8 @@ export class ClassListComponent implements OnInit {
     this.initialize();
   }
 
-  showStudents() {
-
+  showStudents(clazz) {
+    console.log(clazz)
   }
 
   initialize() {
@@ -81,7 +81,9 @@ export class ClassListComponent implements OnInit {
 
   getTeachersForClasses() {
     for (let i in this.clazzes) {
-      this.http.get(this.clazzes[i]._links.teacher.href).subscribe(res => {
+      this.http.get(this.clazzes[i]._links.teacher.href).subscribe(resp => {
+        let res : any;
+        res = resp;
         this.ELEMENT_DATA.push({
           name: this.clazzes[i].name,
           href: this.clazzes[i]._links.self.href,

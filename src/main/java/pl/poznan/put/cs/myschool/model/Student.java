@@ -15,7 +15,6 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="class_id", foreignKey=@ForeignKey(name = "fk_student_class_id"))
     private Clazz clazz;

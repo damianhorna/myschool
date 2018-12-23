@@ -1,0 +1,110 @@
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
+import {TeacherAddDialog} from "../teachers/dialogs/add/teacher-add.component";
+import {ClazzService} from "../../service/clazz/clazz.service";
+import {StudentService} from "../../service/student/student.service";
+
+export interface PeriodicElement {
+  href: string;
+  name: string;
+  surname: string;
+  dateOfBirth: string;
+  clazz: any[];
+}
+
+
+@Component({
+  selector: 'app-student-list',
+  templateUrl: './student-list.component.html',
+  styleUrls: ['./student-list.component.css']
+})
+export class StudentListComponent implements OnInit {
+
+
+  ELEMENT_DATA: PeriodicElement[] = [];
+  displayedColumns: string[] = ['name', 'surname', 'dateOfBirth', 'clazz', 'actions'];
+  dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+  dropdownSettings = {
+    singleSelection: true,
+    idField: 'name',
+    textField: 'name',
+    itemsShowLimit: 3,
+    allowSearchFilter: true,
+    enableCheckAll: false
+  };
+  allClazzes: any[];
+  students: any[];
+
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private studentService: StudentService,
+              private clazzService: ClazzService,
+              public dialog: MatDialog,) {
+  }
+
+  editClazz(student) {
+    for (let clazz of this.allClazzes) {
+      if (clazz.displayName === student.clazz[0]) {
+        this.studentService.putClazz(student, clazz._links.self.href).subscribe();
+      }
+    }
+  }
+
+  deleteClazz(student){
+    this.studentService.deleteClazz(student).subscribe();
+  }
+
+  ngOnInit() {
+    this.initialize();
+  }
+
+  initialize() {
+    this.clazzService.getAll().subscribe(data => {
+      this.allClazzes = data._embedded.clazz;
+    });
+
+    this.studentService.getAll().subscribe(data => {
+      this.students = data._embedded.students;
+      this.ELEMENT_DATA = [];
+      for (let i in this.students) {
+        this.ELEMENT_DATA.push({
+          href: this.students[i]._links.self.href,
+          name: this.students[i].name,
+          surname: this.students[i].surname,
+          dateOfBirth: this.students[i].dateOfBirth,
+          clazz: []
+        });
+        this.studentService.getClazzForStudent(this.students[i]).subscribe(data => {
+          this.ELEMENT_DATA[i].clazz = data
+        });
+      }
+      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.sort = this.sort;
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  delete(href) {
+    this.studentService.remove(href).subscribe(result => {
+      this.initialize()
+    }, error => console.error(error));
+  }
+
+  openDialog(href, name, surname, dateOfBirth): void {
+    const dialogRef = this.dialog.open(TeacherAddDialog, {
+      width: '250px',
+      data: {
+        href: href,
+        name: name,
+        surname: surname,
+        dateOfBirth: new Date(dateOfBirth),
+        clazz: []
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.initialize()
+    });
+  }
+
+}

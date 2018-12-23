@@ -32,6 +32,7 @@ import {ClazzAddDialog} from "./components/classes/dialogs/add/clazz-add.compone
 import {SubjectsPipe} from "./pipes/SubjectsPipe";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ClassListComponent } from './components/classes/class-list.component';
+import { StudentListComponent } from './components/students/student-list.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { ClassListComponent } from './components/classes/class-list.component';
     TeacherAddDialog,
     SubjectsPipe,
     ClassListComponent,
-    ClazzAddDialog
+    ClazzAddDialog,
+    StudentListComponent
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog],
   imports: [
