@@ -28,8 +28,10 @@ import {ClassroomListComponent} from './components/classrooms/classroom-list.com
 import {ClassroomAddDialog} from "./components/classrooms/dialogs/add/classroom-add.component";
 import {TeacherListComponent} from './components/teachers/teacher-list.component';
 import {TeacherAddDialog} from "./components/teachers/dialogs/add/teacher-add.component";
+import {ClazzAddDialog} from "./components/classes/dialogs/add/clazz-add.component"
 import {SubjectsPipe} from "./pipes/SubjectsPipe";
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ClassListComponent } from './components/classes/class-list.component';
 
 
 @NgModule({
@@ -42,9 +44,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     ClassroomAddDialog,
     TeacherListComponent,
     TeacherAddDialog,
-    SubjectsPipe
+    SubjectsPipe,
+    ClassListComponent,
+    ClazzAddDialog
   ],
-  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,

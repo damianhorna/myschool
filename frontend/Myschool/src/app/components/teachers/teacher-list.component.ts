@@ -73,10 +73,6 @@ export class TeacherListComponent implements OnInit {
       this.teachers = data._embedded.teachers;
       this.ELEMENT_DATA = [];
       for (let i in this.teachers) {
-        this.teachingService.getSubjectsForTeacher(this.teachers[i]).subscribe(data => {
-          this.ELEMENT_DATA[i].subjects = data._embedded.subjects
-        });
-
         this.ELEMENT_DATA.push({
           name: this.teachers[i].name,
           href: this.teachers[i]._links.self.href,
@@ -84,6 +80,9 @@ export class TeacherListComponent implements OnInit {
           salary: this.teachers[i].salary,
           dateOfEmployment: this.teachers[i].dateOfEmployment,
           subjects: []
+        });
+        this.teachingService.getSubjectsForTeacher(this.teachers[i]).subscribe(data => {
+          this.ELEMENT_DATA[i].subjects = data._embedded.subjects
         });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);

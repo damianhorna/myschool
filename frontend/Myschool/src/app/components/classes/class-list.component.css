@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 0;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+th{
+  justify-content: center;
+}
+
+mat-paginator{
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.green-background{
+  background-color: seagreen;
+}
