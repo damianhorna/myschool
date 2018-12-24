@@ -55,8 +55,6 @@ export class ClassListComponent implements OnInit {
       this.clazzes = data._embedded.clazzes;
       this.ELEMENT_DATA = [];
       this.getTeachersForClasses();
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
     });
 
     this.teacherService.getAll().subscribe(data => {
@@ -90,6 +88,8 @@ export class ClassListComponent implements OnInit {
           teacher: [{...res, displayName: res.name + ' ' + res.surname}],
         });
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       }, err => {
         //teacher has not been set yet
         this.ELEMENT_DATA.push({
@@ -98,6 +98,8 @@ export class ClassListComponent implements OnInit {
           teacher: [],
         });
         this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       });
     }
   }

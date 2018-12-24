@@ -3,6 +3,8 @@ import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from "@angular/mat
 import {TeacherAddDialog} from "../teachers/dialogs/add/teacher-add.component";
 import {ClazzService} from "../../service/clazz/clazz.service";
 import {StudentService} from "../../service/student/student.service";
+import {HttpClient} from "@angular/common/http";
+import {StudentAddDialog} from "./dialogs/add/student-add.component";
 
 export interface PeriodicElement {
   href: string;
@@ -40,18 +42,19 @@ export class StudentListComponent implements OnInit {
 
   constructor(private studentService: StudentService,
               private clazzService: ClazzService,
-              public dialog: MatDialog,) {
+              public dialog: MatDialog,
+              private http: HttpClient) {
   }
 
   editClazz(student) {
     for (let clazz of this.allClazzes) {
-      if (clazz.displayName === student.clazz[0]) {
-        this.studentService.putClazz(student, clazz._links.self.href).subscribe();
+      if (clazz.name === student.clazz[0]) {
+        this.studentService.putClazz(student, clazz._links.self.href).subscribe(res => console.log(res), err => console.log(err));
       }
     }
   }
 
-  deleteClazz(student){
+  deleteClazz(student) {
     this.studentService.deleteClazz(student).subscribe();
   }
 
@@ -61,7 +64,7 @@ export class StudentListComponent implements OnInit {
 
   initialize() {
     this.clazzService.getAll().subscribe(data => {
-      this.allClazzes = data._embedded.clazz;
+      this.allClazzes = data._embedded.clazzes;
     });
 
     this.studentService.getAll().subscribe(data => {
@@ -75,8 +78,12 @@ export class StudentListComponent implements OnInit {
           dateOfBirth: this.students[i].dateOfBirth,
           clazz: []
         });
-        this.studentService.getClazzForStudent(this.students[i]).subscribe(data => {
-          this.ELEMENT_DATA[i].clazz = data
+        this.http.get(this.students[i]._links.clazz.href).subscribe(data => {
+          let res : any;
+          res = data;
+          this.ELEMENT_DATA[i].clazz = [res];
+        }, err => {
+
         });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -92,14 +99,13 @@ export class StudentListComponent implements OnInit {
   }
 
   openDialog(href, name, surname, dateOfBirth): void {
-    const dialogRef = this.dialog.open(TeacherAddDialog, {
+    const dialogRef = this.dialog.open(StudentAddDialog, {
       width: '250px',
       data: {
         href: href,
         name: name,
         surname: surname,
         dateOfBirth: new Date(dateOfBirth),
-        clazz: []
       }
     });
     dialogRef.afterClosed().subscribe(result => {

@@ -33,15 +33,12 @@ export class StudentService {
 
 
   putClazz(student, clazzHref) {
+    console.log("put clazz", clazzHref)
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
     return this.http.put(student.href + '/clazz', clazzHref, {headers: headers});
   }
 
   deleteClazz(student) {
     return this.http.delete(student.href + '/clazz');
-  }
-
-  getClazzForStudent(student): any {
-    return this.http.get(student._links.clazz);
   }
 }

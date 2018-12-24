@@ -1,19 +1,17 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
-import {TeacherService} from "../../../../service/teacher/teacher.service";
-import {ValidationService} from "../../../../service/validation/validation.service";
+import {StudentService} from "../../../../service/student/student.service";
 
-export interface TeacherData {
+export interface StudentData {
   href: string;
   name: string;
   surname: string;
-  dateOfEmployment: Date;
-  salary: number;
+  dateOfBirth: Date;
 }
 
 @Component({
-  selector: 'teacher-add-dialog',
-  templateUrl: './teacher-add-dialog.html',
+  selector: 'student-add-dialog',
+  templateUrl: './student-add-dialog.html',
 })
 export class StudentAddDialog {
 
@@ -22,9 +20,8 @@ export class StudentAddDialog {
 
   constructor(
     public dialogRef: MatDialogRef<StudentAddDialog>,
-    @Inject(MAT_DIALOG_DATA) public teacherData: TeacherData,
-    private teacherService: TeacherService,
-    private validationService: ValidationService) {
+    @Inject(MAT_DIALOG_DATA) public studentData: StudentData,
+    private studentService: StudentService) {
   }
 
   onNoClick(): void {
@@ -32,18 +29,15 @@ export class StudentAddDialog {
   }
 
   validationSuccessful() {
-    if (this.teacherData.name.match(/^\s*$/)) {
+    if (this.studentData.name.match(/^\s*$/)) {
       this.error = true;
-      this.errorMsg = 'teacher name may not be empty';
+      this.errorMsg = 'student name may not be empty';
       return false;
-    } else if (this.teacherData.surname.match(/^\s*$/)) {
+    } else if (this.studentData.surname.match(/^\s*$/)) {
       this.error = true;
-      this.errorMsg = 'teacher surname may not be empty';
+      this.errorMsg = 'student surname may not be empty';
       return false;
-    } else if (!this.validationService.isNumber(this.teacherData.salary)) {
-      this.error = true;
-      this.errorMsg = 'salary must be a positive number';
-    } else if (this.teacherData.dateOfEmployment == null) {
+    } else if (this.studentData.dateOfBirth == null) {
       this.error = true;
       this.errorMsg = 'provide a date';
       return false;
@@ -51,17 +45,17 @@ export class StudentAddDialog {
   }
 
 
-  saveTeacher() {
-    let date = this.teacherData.dateOfEmployment;
-    this.teacherService.save({
-      href: this.teacherData.href,
-      name: this.teacherData.name.trim(),
-      surname: this.teacherData.surname.trim(),
-      dateOfEmployment: (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear(),
-      salary: this.teacherData.salary
+  saveStudent() {
+    let date = this.studentData.dateOfBirth;
+    this.studentService.save({
+      href: this.studentData.href,
+      name: this.studentData.name.trim(),
+      surname: this.studentData.surname.trim(),
+      dateOfBirth: (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear(),
     }).subscribe(result => {
       this.dialogRef.close();
     }, error => {
+      console.log(error);
       this.error = true;
       this.errorMsg = 'Error occurred';
     });
@@ -70,7 +64,7 @@ export class StudentAddDialog {
   addTeacher() {
     this.error = false;
     if (this.validationSuccessful()) {
-      this.saveTeacher()
+      this.saveStudent()
     }
   }
 }

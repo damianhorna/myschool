@@ -1,5 +1,6 @@
 package pl.poznan.put.cs.myschool.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -15,8 +16,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="class_id", foreignKey=@ForeignKey(name = "fk_student_class_id"))
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "class_id", foreignKey = @ForeignKey(name = "fk_student_class_id"))
     private Clazz clazz;
 
     @NotNull
@@ -29,6 +30,7 @@ public class Student {
     private String surname;
 
     @NotNull
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private Date dateOfBirth;
 
     @OneToMany(mappedBy = "student")
