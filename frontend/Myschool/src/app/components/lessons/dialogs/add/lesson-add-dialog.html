@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{lessonData.href ? 'Edit' : 'Add'}} lesson</h1>
+<div mat-dialog-content>
+  <p>Provide information about the lesson</p>
+  <input type="hidden" name="href" [(ngModel)]="lessonData.href">
+  <mat-form-field>
+    <input matInput required placeholder="Topic" [(ngModel)]="lessonData.topic">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [matDatepicker]="picker" placeholder="Date of lesson"
+           [(ngModel)]="lessonData.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</div>
+<div *ngIf="error" class="error-msg">{{errorMsg}}</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-raised-button (click)="addTeacher()">Save</button>
+</div>

@@ -34,6 +34,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ClassListComponent } from './components/classes/class-list.component';
 import { StudentListComponent } from './components/students/student-list.component';
 import {StudentAddDialog} from "./components/students/dialogs/add/student-add.component";
+import { LessonListComponent } from './components/lessons/lesson-list.component';
+import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.component";
 
 
 @NgModule({
@@ -50,9 +52,11 @@ import {StudentAddDialog} from "./components/students/dialogs/add/student-add.co
     ClassListComponent,
     ClazzAddDialog,
     StudentListComponent,
-    StudentAddDialog
+    StudentAddDialog,
+    LessonListComponent,
+    LessonAddDialog
   ],
-  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,

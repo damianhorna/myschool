@@ -21,6 +21,10 @@
       <mat-icon>person</mat-icon>
       Students
     </a>
+    <a mat-button (click)="activateScreen(6)" class="sidenav-menu-option">
+      <mat-icon>description</mat-icon>
+      Lessons
+    </a>
   </mat-drawer>
 
   <div class="sidenav-content">
@@ -46,6 +50,9 @@
     </div>
     <div *ngIf="render[5]" class="sidenav-content-inner">
       <app-student-list></app-student-list>
+    </div>
+    <div *ngIf="render[6]" class="sidenav-content-inner">
+      <app-lesson-list></app-lesson-list>
     </div>
   </div>
 
