@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-  render: boolean[] = [true, false, false, false, false, false, false];
+  render: boolean[] = [true, false, false, false, false, false, false, false];
 
   constructor() {
   }

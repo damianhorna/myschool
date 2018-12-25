@@ -36,6 +36,7 @@ import { StudentListComponent } from './components/students/student-list.compone
 import {StudentAddDialog} from "./components/students/dialogs/add/student-add.component";
 import { LessonListComponent } from './components/lessons/lesson-list.component';
 import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.component";
+import { GradeListComponent } from './components/grades/grade-list.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.compo
     StudentListComponent,
     StudentAddDialog,
     LessonListComponent,
-    LessonAddDialog
+    LessonAddDialog,
+    GradeListComponent
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog],
   imports: [
