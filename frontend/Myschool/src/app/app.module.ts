@@ -37,6 +37,8 @@ import {StudentAddDialog} from "./components/students/dialogs/add/student-add.co
 import { LessonListComponent } from './components/lessons/lesson-list.component';
 import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.component";
 import { GradeListComponent } from './components/grades/grade-list.component';
+import { TestListComponent } from './components/tests/test-list.component';
+import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
 
 
 @NgModule({
@@ -56,9 +58,11 @@ import { GradeListComponent } from './components/grades/grade-list.component';
     StudentAddDialog,
     LessonListComponent,
     LessonAddDialog,
-    GradeListComponent
+    GradeListComponent,
+    TestListComponent,
+    TestAddDialog
   ],
-  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,

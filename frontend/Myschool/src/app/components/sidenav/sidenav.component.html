@@ -26,8 +26,12 @@
       Lessons
     </a>
     <a mat-button (click)="activateScreen(7)" class="sidenav-menu-option">
-      <mat-icon>description</mat-icon>
+      <mat-icon>grade</mat-icon>
       Grades
+    </a>
+    <a mat-button (click)="activateScreen(8)" class="sidenav-menu-option">
+      <mat-icon>border_color</mat-icon>
+      Test types
     </a>
   </mat-drawer>
 
@@ -60,6 +64,9 @@
     </div>
     <div *ngIf="render[7]" class="sidenav-content-inner">
       <app-grade-list></app-grade-list>
+    </div>
+    <div *ngIf="render[8]" class="sidenav-content-inner">
+      <app-test-list></app-test-list>
     </div>
   </div>
 
