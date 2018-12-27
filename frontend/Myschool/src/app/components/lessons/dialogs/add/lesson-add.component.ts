@@ -41,11 +41,12 @@ export class LessonAddDialog {
 
 
   saveLesson() {
+    //"dd-MM-yyyy HH:mm:ss"
     let date = this.lessonData.date;
     this.lessonService.save({
       href: this.lessonData.href,
       topic: this.lessonData.topic.trim(),
-      date: (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear(),
+      date: (date.getDate() + 1).toString() + '-' + (date.getMonth() + 1).toString() + '-' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds(),
     }).subscribe(result => {
       this.dialogRef.close();
     }, error => {

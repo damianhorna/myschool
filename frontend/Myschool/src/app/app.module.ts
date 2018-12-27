@@ -39,6 +39,8 @@ import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.compo
 import { GradeListComponent } from './components/grades/grade-list.component';
 import { TestListComponent } from './components/tests/test-list.component';
 import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from "ng-pick-datetime";
+import { DateTimePipePipe } from './pipes/date-time-pipe.pipe';
 
 
 @NgModule({
@@ -60,7 +62,8 @@ import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
     LessonAddDialog,
     GradeListComponent,
     TestListComponent,
-    TestAddDialog
+    TestAddDialog,
+    DateTimePipePipe
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog],
   imports: [
@@ -85,7 +88,9 @@ import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

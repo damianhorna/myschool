@@ -11,7 +11,7 @@ import {LessonAddDialog} from "./dialogs/add/lesson-add.component";
 
 export interface PeriodicElement {
   href: string;
-  date: string;
+  date: Date;
   topic: string;
   classroom: any[];
   clazz: any[];
@@ -160,7 +160,7 @@ export class LessonListComponent implements OnInit {
       for (let i in this.lessons) {
         this.ELEMENT_DATA.push({
           href: this.lessons[i]._links.self.href,
-          date: this.lessons[i].date,
+          date: new Date(this.lessons[i].date),
           topic: this.lessons[i].topic,
           clazz: [],
           classroom: [],
