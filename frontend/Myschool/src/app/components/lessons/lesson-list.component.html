@@ -2,69 +2,46 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="topic">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Topic</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Topic </th>
     <td mat-cell *matCellDef="let element"> {{element.topic}}</td>
   </ng-container>
 
   <ng-container matColumnDef="date">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date</th>
-    <td mat-cell *matCellDef="let element"> {{element.date}}</td>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Date </th>
+    <td mat-cell *matCellDef="let element"> &nbsp;&nbsp;&nbsp;{{element.date}}</td>
   </ng-container>
 
   <ng-container matColumnDef="classroom">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Classroom</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Classroom </th>
     <td mat-cell *matCellDef="let element">
-      <ng-multiselect-dropdown
-        [placeholder]="'none of the classrooms'"
-        [data]="allClassrooms"
-        [(ngModel)]="element.classroom"
-        [settings]="dropdownClassroomSettings"
-        (onSelect)="editClassroom(element)"
-        (onDeSelect)="deleteClassroom(element)">
-      </ng-multiselect-dropdown>
+      &nbsp;&nbsp;&nbsp;{{element.classroom.number}}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="clazz">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Class</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Class </th>
     <td mat-cell *matCellDef="let element">
-      <ng-multiselect-dropdown
-        [placeholder]="'none of the classes'"
-        [data]="allClazzes"
-        [(ngModel)]="element.clazz"
-        [settings]="dropdownClazzSettings"
-        (onSelect)="editClazz(element)"
-        (onDeSelect)="deleteClazz(element)">
-      </ng-multiselect-dropdown>
+        &nbsp;&nbsp;&nbsp;{{element.clazz.name}}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="subject">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Subject </th>
     <td mat-cell *matCellDef="let element">
-      <ng-multiselect-dropdown
-        [placeholder]="'none of the subjects'"
-        [data]="allSubjects"
-        [(ngModel)]="element.subject"
-        [settings]="dropdownSubjectSettings"
-        (onSelect)="editSubject(element)"
-        (onDeSelect)="deleteSubject(element)">
-      </ng-multiselect-dropdown>
+      &nbsp;&nbsp;&nbsp;{{element.subject.name}}
     </td>
   </ng-container>
 
   <ng-container matColumnDef="teacher">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Teacher</th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Teacher</th>
     <td mat-cell *matCellDef="let element">
-      <ng-multiselect-dropdown
-        [placeholder]="'none of the teachers'"
-        [data]="allTeachers"
-        [(ngModel)]="element.teacher"
-        [settings]="dropdownTeacherSettings"
-        (onSelect)="editTeacher(element)"
-        (onDeSelect)="deleteTeacher(element)">
-      </ng-multiselect-dropdown>
+      &nbsp;&nbsp;&nbsp;{{element.teacher.name + ' ' + element.teacher.surname}}
     </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lessonUnit">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp;&nbsp;&nbsp;Lesson unit</th>
+    <td mat-cell *matCellDef="let element">&nbsp;&nbsp;&nbsp;{{element.lessonUnit | lessonUnitPipe}}</td>
   </ng-container>
 
   <!-- Name Column -->
@@ -72,7 +49,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 50px;"> Actions</th>
     <td mat-cell *matCellDef="let element" style="padding-left: 50px;">
       <button mat-icon-button
-              (click)="openDialog(element.href,element.date, element.topic)">
+              (click)="openDialog(element.href,element.date, element.topic, element.lessonUnit, element.classroom._links.self.href, element.clazz._links.self.href, element.subject._links.self.href, element.teacher._links.self.href)">
         <mat-icon class="blue-icon">edit</mat-icon>
       </button>
       <button mat-icon-button (click)="delete(element.href)">
@@ -88,7 +65,7 @@
 <mat-paginator [pageSizeOptions]="[5, 10]" showFirstLastButtons class="mat-elevation-z8"></mat-paginator>
 
 <div>
-  <button mat-mini-fab class="green-background" (click)="openDialog(null, '', '')">
+  <button mat-mini-fab class="green-background" (click)="openDialog(null, '', '', 1, '', '', '', '')">
     <mat-icon class="lavender-icon">add</mat-icon>
   </button>
 </div>

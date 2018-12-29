@@ -11,6 +11,42 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Lesson unit" [(ngModel)]="lessonData.lessonUnit" required>
+      <mat-option *ngFor="let lessonUnit of lessonUnits" [value]="lessonUnit.value">
+        {{lessonUnit.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Teacher" [(ngModel)]="lessonData.teacher" required>
+      <mat-option *ngFor="let teacher of teachers" [value]="teacher._links.self.href">
+        {{teacher.name + ' '  + teacher.surname}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Classroom" [(ngModel)]="lessonData.classroom" required>
+      <mat-option *ngFor="let classroom of classrooms" [value]="classroom._links.self.href">
+        {{classroom.number}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Class" [(ngModel)]="lessonData.clazz" required>
+      <mat-option *ngFor="let clazz of clazzes" [value]="clazz._links.self.href">
+        {{clazz.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Subject" [(ngModel)]="lessonData.subject" required>
+      <mat-option *ngFor="let subject of subjects" [value]="subject._links.self.href">
+        {{subject.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div *ngIf="error" class="error-msg">{{errorMsg}}</div>
 <div mat-dialog-actions>

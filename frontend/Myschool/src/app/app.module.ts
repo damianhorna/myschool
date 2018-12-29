@@ -18,7 +18,9 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatSelectModule,
+  MatOptionModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
@@ -39,6 +41,7 @@ import {LessonAddDialog} from "./components/lessons/dialogs/add/lesson-add.compo
 import { GradeListComponent } from './components/grades/grade-list.component';
 import { TestListComponent } from './components/tests/test-list.component';
 import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
+import { LessonUnitPipe } from './pipes/LessonUnitPipe';
 
 
 @NgModule({
@@ -60,7 +63,8 @@ import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
     LessonAddDialog,
     GradeListComponent,
     TestListComponent,
-    TestAddDialog
+    TestAddDialog,
+    LessonUnitPipe
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog],
   imports: [
@@ -85,7 +89,9 @@ import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
     MatPaginatorModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    MatSelectModule,
+    MatOptionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

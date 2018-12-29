@@ -31,44 +31,28 @@ export class LessonService {
     return this.http.delete(href);
   }
 
-
-  putClazz(lesson, clazzHref) {
+  putClazz(lessonHref, clazzHref) {
     console.log("put clazz", clazzHref);
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
-    return this.http.put(lesson.href + '/clazz', clazzHref, {headers: headers});
+    return this.http.put(lessonHref + '/clazz', clazzHref, {headers: headers});
   }
 
-  deleteClazz(lesson) {
-    return this.http.delete(lesson.href + '/clazz');
-  }
-
-  putClassroom(lesson, classroomHref) {
+  putClassroom(lessonHref, classroomHref) {
     console.log("put classroom", classroomHref);
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
-    return this.http.put(lesson.href + '/classroom', classroomHref, {headers: headers});
+    return this.http.put(lessonHref + '/classroom', classroomHref, {headers: headers});
   }
 
-  deleteClassroom(lesson) {
-    return this.http.delete(lesson.href + '/classroom');
-  }
-
-  putSubject(lesson, subjectHref) {
+  putSubject(lessonHref, subjectHref) {
     console.log("put subject", subjectHref);
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
-    return this.http.put(lesson.href + '/subject', subjectHref, {headers: headers});
+    return this.http.put(lessonHref + '/subject', subjectHref, {headers: headers});
   }
 
-  deleteSubject(lesson) {
-    return this.http.delete(lesson.href + '/subject');
-  }
 
-  putTeacher(lesson, teacherHref) {
+  putTeacher(lessonHref, teacherHref) {
     console.log("put teacher", teacherHref)
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
-    return this.http.put(lesson.href + '/teacher', teacherHref, {headers: headers});
-  }
-
-  deleteTeacher(lesson) {
-    return this.http.delete(lesson.href + '/teacher');
+    return this.http.put(lessonHref + '/teacher', teacherHref, {headers: headers});
   }
 }

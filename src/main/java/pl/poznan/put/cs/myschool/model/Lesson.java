@@ -39,6 +39,9 @@ public class Lesson {
     @NotNull
     private String topic;
 
+    @NotNull
+    private int lessonUnit;
+
     @OneToMany(mappedBy = "lesson")
     private List<Grade> grades;
 

@@ -8,6 +8,10 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+td{
+  text-align: left;
+}
+
 th{
   justify-content: center;
 }
