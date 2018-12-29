@@ -50,10 +50,10 @@ export class TestListComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  openDialog(type, href): void {
+  openDialog(name, href): void {
     const dialogRef = this.dialog.open(TestAddDialog, {
       width: '250px',
-      data: {type: type, href: href}
+      data: {name: name, href: href}
     });
 
     dialogRef.afterClosed().subscribe(result => {
