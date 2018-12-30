@@ -8,7 +8,7 @@ import {HttpClient} from "@angular/common/http";
 export interface PeriodicElement {
   href: string;
   name: string;
-  teacher: any[];
+  teacher: any;
 }
 
 @Component({
@@ -21,16 +21,6 @@ export class ClassListComponent implements OnInit {
   ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['name', 'class teacher', 'actions'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  dropdownSettings = {
-    singleSelection: true,
-    idField: 'displayName',
-    textField: 'displayName',
-    itemsShowLimit: 3,
-    allowSearchFilter: true,
-    enableCheckAll: false
-  };
-
-  allTeachers: any[];
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -54,65 +44,34 @@ export class ClassListComponent implements OnInit {
     this.clazzService.getAll().subscribe(data => {
       this.clazzes = data._embedded.clazzes;
       this.ELEMENT_DATA = [];
-      this.getTeachersForClasses();
+      for (let i in this.clazzes) {
+        this.http.get(this.clazzes[i]._links.teacher.href).subscribe(resp => {
+          let res: any;
+          res = resp;
+          this.ELEMENT_DATA.push({
+            name: this.clazzes[i].name,
+            href: this.clazzes[i]._links.self.href,
+            teacher: res,
+          });
+          this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
+        });
+      }
     });
-
-    this.teacherService.getAll().subscribe(data => {
-      this.allTeachers = [];
-      for (let teacher of data._embedded.teachers) {
-        this.allTeachers.push({...teacher, displayName: teacher.name + ' ' + teacher.surname})
-      }
-    }, err => console.log(err));
-  }
-
-  editTeacher(clazz) {
-    for (let teacher of this.allTeachers) {
-      if (teacher.displayName === clazz.teacher[0]) {
-        this.clazzService.putTeacher(clazz, teacher._links.self.href).subscribe();
-      }
-    }
-  }
-
-  deleteTeacher(clazz){
-    this.clazzService.deleteTeacher(clazz).subscribe();
-  }
-
-  getTeachersForClasses() {
-    for (let i in this.clazzes) {
-      this.http.get(this.clazzes[i]._links.teacher.href).subscribe(resp => {
-        let res : any;
-        res = resp;
-        this.ELEMENT_DATA.push({
-          name: this.clazzes[i].name,
-          href: this.clazzes[i]._links.self.href,
-          teacher: [{...res, displayName: res.name + ' ' + res.surname}],
-        });
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      }, err => {
-        //teacher has not been set yet
-        this.ELEMENT_DATA.push({
-          name: this.clazzes[i].name,
-          href: this.clazzes[i]._links.self.href,
-          teacher: [],
-        });
-        this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
-      });
-    }
   }
 
   delete(href) {
     this.clazzService.remove(href).subscribe(res => this.initialize());
   }
 
-  openDialog(href, name): void {
+  openDialog(href, name, teacher): void {
     const dialogRef = this.dialog.open(ClazzAddDialog, {
+      width: '250px',
       data: {
         href: href,
         name: name,
+        teacher: teacher
       }
     });
     dialogRef.afterClosed().subscribe(result => {

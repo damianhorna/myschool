@@ -11,7 +11,7 @@ export interface PeriodicElement {
   name: string;
   surname: string;
   dateOfBirth: string;
-  clazz: any[];
+  clazz: any;
 }
 
 
@@ -26,15 +26,6 @@ export class StudentListComponent implements OnInit {
   ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = ['name', 'surname', 'dateOfBirth', 'clazz', 'actions'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
-  dropdownSettings = {
-    singleSelection: true,
-    idField: 'name',
-    textField: 'name',
-    itemsShowLimit: 3,
-    allowSearchFilter: true,
-    enableCheckAll: false
-  };
-  allClazzes: any[];
   students: any[];
 
   @ViewChild(MatSort) sort: MatSort;
@@ -46,27 +37,11 @@ export class StudentListComponent implements OnInit {
               private http: HttpClient) {
   }
 
-  editClazz(student) {
-    for (let clazz of this.allClazzes) {
-      if (clazz.name === student.clazz[0]) {
-        this.studentService.putClazz(student, clazz._links.self.href).subscribe(res => console.log(res), err => console.log(err));
-      }
-    }
-  }
-
-  deleteClazz(student) {
-    this.studentService.deleteClazz(student).subscribe();
-  }
-
   ngOnInit() {
     this.initialize();
   }
 
   initialize() {
-    this.clazzService.getAll().subscribe(data => {
-      this.allClazzes = data._embedded.clazzes;
-    });
-
     this.studentService.getAll().subscribe(data => {
       this.students = data._embedded.students;
       this.ELEMENT_DATA = [];
@@ -76,14 +51,12 @@ export class StudentListComponent implements OnInit {
           name: this.students[i].name,
           surname: this.students[i].surname,
           dateOfBirth: this.students[i].dateOfBirth,
-          clazz: []
+          clazz: {}
         });
         this.http.get(this.students[i]._links.clazz.href).subscribe(data => {
           let res : any;
           res = data;
-          this.ELEMENT_DATA[i].clazz = [res];
-        }, err => {
-
+          this.ELEMENT_DATA[i].clazz = res;
         });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
@@ -98,14 +71,15 @@ export class StudentListComponent implements OnInit {
     }, error => console.error(error));
   }
 
-  openDialog(href, name, surname, dateOfBirth): void {
+  openDialog(href, name, surname, dateOfBirth, clazz): void {
     const dialogRef = this.dialog.open(StudentAddDialog, {
       width: '250px',
       data: {
         href: href,
         name: name,
         surname: surname,
-        dateOfBirth: new Date(dateOfBirth),
+        dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
+        clazz: clazz
       }
     });
     dialogRef.afterClosed().subscribe(result => {

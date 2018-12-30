@@ -5,6 +5,13 @@
   <mat-form-field>
     <input matInput required placeholder="Name" [(ngModel)]="clazzData.name">
   </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Class teacher" [(ngModel)]="clazzData.teacher" required>
+      <mat-option *ngFor="let teacher of teachers" [value]="teacher._links.self.href">
+        {{teacher.name + ' ' + teacher.surname}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 <div *ngIf="error" class="error-msg">{{errorMsg}}</div>
 <div mat-dialog-actions>

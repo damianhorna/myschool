@@ -30,9 +30,9 @@ export class ClazzService {
   }
 
 
-  putTeacher(clazz, teacherHref) {
+  putTeacher(clazzHref, teacherHref) {
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
-    return this.http.put(clazz.href + '/teacher', teacherHref, {headers: headers});
+    return this.http.put(clazzHref + '/teacher', teacherHref, {headers: headers});
   }
 
   deleteTeacher(clazz){

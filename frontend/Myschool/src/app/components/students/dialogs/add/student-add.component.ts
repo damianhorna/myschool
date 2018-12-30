@@ -1,12 +1,14 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {StudentService} from "../../../../service/student/student.service";
+import {ClazzService} from "../../../../service/clazz/clazz.service";
 
 export interface StudentData {
   href: string;
   name: string;
   surname: string;
   dateOfBirth: Date;
+  clazz: string
 }
 
 @Component({
@@ -17,11 +19,14 @@ export class StudentAddDialog {
 
   errorMsg: string;
   error = false;
+  clazzes: any[];
 
   constructor(
     public dialogRef: MatDialogRef<StudentAddDialog>,
     @Inject(MAT_DIALOG_DATA) public studentData: StudentData,
-    private studentService: StudentService) {
+    private studentService: StudentService,
+    private clazzService: ClazzService) {
+    clazzService.getAll().subscribe(data => this.clazzes = data._embedded.clazzes)
   }
 
   onNoClick(): void {
@@ -41,6 +46,10 @@ export class StudentAddDialog {
       this.error = true;
       this.errorMsg = 'provide a date';
       return false;
+    } else if (this.studentData.clazz == '') {
+      this.error = true;
+      this.errorMsg = 'choose a class';
+      return false;
     } else return true;
   }
 
@@ -53,7 +62,7 @@ export class StudentAddDialog {
       surname: this.studentData.surname.trim(),
       dateOfBirth: (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear(),
     }).subscribe(result => {
-      this.dialogRef.close();
+      this.studentService.putClazz(result._links.self.href, this.studentData.clazz).subscribe(res => this.dialogRef.close());
     }, error => {
       console.log(error);
       this.error = true;
