@@ -143,6 +143,13 @@ export class LessonListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.date.toLowerCase().includes(filter)
+        || data.topic.toLowerCase().includes(filter)
+        || (data.teacher.name.toLowerCase() + ' ' + data.teacher.surname.toLowerCase()).includes(filter)
+        || data.classroom.number.toString().toLowerCase().includes(filter)
+        || data.subject.name.toLowerCase().includes(filter)
+        || data.clazz.name.toLowerCase().includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

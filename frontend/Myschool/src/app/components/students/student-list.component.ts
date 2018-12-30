@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatPaginator, MatSort, MatTableDataSource} from "@angular/material";
-import {TeacherAddDialog} from "../teachers/dialogs/add/teacher-add.component";
 import {ClazzService} from "../../service/clazz/clazz.service";
 import {StudentService} from "../../service/student/student.service";
 import {HttpClient} from "@angular/common/http";
@@ -54,7 +53,7 @@ export class StudentListComponent implements OnInit {
           clazz: {}
         });
         this.http.get(this.students[i]._links.clazz.href).subscribe(data => {
-          let res : any;
+          let res: any;
           res = data;
           this.ELEMENT_DATA[i].clazz = res;
         });
@@ -86,7 +85,12 @@ export class StudentListComponent implements OnInit {
       this.initialize()
     });
   }
+
   applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.clazz.name.toLowerCase().includes(filter)
+        || data.dateOfBirth.toLowerCase().includes(filter)
+        || (data.name.toLowerCase() + ' ' + data.surname.toLowerCase()).includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
