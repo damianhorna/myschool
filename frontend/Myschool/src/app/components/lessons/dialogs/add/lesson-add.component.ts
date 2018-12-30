@@ -113,13 +113,16 @@ export class LessonAddDialog {
       date: (date.getMonth() + 1).toString() + '/' + (date.getDate() + 1).toString() + '/' + date.getFullYear(),
       lessonUnit: this.lessonData.lessonUnit
     }).subscribe(result => {
-      this.lessonService.putTeacher(result._links.self.href, this.lessonData.teacher).subscribe(res => console.log(res), err => console.log(err));
-      this.lessonService.putClassroom(result._links.self.href, this.lessonData.classroom).subscribe(res => console.log(res), err => console.log(err));
-      this.lessonService.putClazz(result._links.self.href, this.lessonData.clazz).subscribe(res => console.log(res), err => console.log(err));
-      this.lessonService.putSubject(result._links.self.href, this.lessonData.subject).subscribe(res => this.dialogRef.close(), err => console.log(err));
+      this.lessonService.putTeacher(result._links.self.href, this.lessonData.teacher).subscribe(res => {
+        this.lessonService.putClassroom(result._links.self.href, this.lessonData.classroom).subscribe(res => {
+          this.lessonService.putClazz(result._links.self.href, this.lessonData.clazz).subscribe(res => {
+            this.lessonService.putSubject(result._links.self.href, this.lessonData.subject).subscribe(res => this.dialogRef.close(), err => console.log(err));
+          }, err => console.log(err));
+        }, err => console.log(err));
+      }, err => console.log(err));
     }, error => {
       this.error = true;
-      this.errorMsg = 'Error occurred, provide a date';
+      this.errorMsg = 'Error occurred';
     });
   }
 
