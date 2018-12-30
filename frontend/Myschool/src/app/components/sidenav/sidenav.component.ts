@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {NavigationService} from "../../service/navigation/navigation.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -6,18 +7,14 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./sidenav.component.css']
 })
 export class SidenavComponent implements OnInit {
-  render: boolean[] = [true, false, false, false, false, false, false, false, false];
+  navService : any;
 
-  constructor() {
+  constructor(private navigationService: NavigationService) {
+    this.navService = navigationService;
   }
 
   ngOnInit() {
   }
 
-  activateScreen(screenNumber){
-    for (let i = 0; i< this.render.length; i++) {
-      this.render[i] = false;
-    }
-    this.render[screenNumber] = true;
-  }
+
 }

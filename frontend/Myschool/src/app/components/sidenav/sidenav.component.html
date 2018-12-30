@@ -1,35 +1,35 @@
 <mat-drawer-container class="sidenav-container" autosize>
   <mat-drawer #drawer class="sidenav-drawer" mode="side">
     <p>Myschool</p>
-    <a mat-button (click)="activateScreen(1)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(1)" class="sidenav-menu-option">
       <mat-icon>short_text</mat-icon>
       Subjects
     </a>
-    <a mat-button (click)="activateScreen(2)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(2)" class="sidenav-menu-option">
       <mat-icon>meeting_room</mat-icon>
       Classrooms
     </a>
-    <a mat-button (click)="activateScreen(3)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(3)" class="sidenav-menu-option">
       <mat-icon>group</mat-icon>
       Classes
     </a>
-    <a mat-button (click)="activateScreen(4)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(4)" class="sidenav-menu-option">
       <mat-icon>school</mat-icon>
       Teachers
     </a>
-    <a mat-button (click)="activateScreen(5)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(5)" class="sidenav-menu-option">
       <mat-icon>person</mat-icon>
       Students
     </a>
-    <a mat-button (click)="activateScreen(6)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(6)" class="sidenav-menu-option">
       <mat-icon>description</mat-icon>
       Lessons
     </a>
-    <a mat-button (click)="activateScreen(7)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(7)" class="sidenav-menu-option">
       <mat-icon>grade</mat-icon>
       Grades
     </a>
-    <a mat-button (click)="activateScreen(8)" class="sidenav-menu-option">
+    <a mat-button (click)="navService.activateScreen(8)" class="sidenav-menu-option">
       <mat-icon>border_color</mat-icon>
       Test types
     </a>
@@ -41,31 +41,31 @@
         <mat-icon>menu</mat-icon>
       </button>
     </div>
-    <div *ngIf="render[0]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[0]" class="sidenav-content-inner">
       Welcome to Myschool App!
     </div>
-    <div *ngIf="render[1]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[1]" class="sidenav-content-inner">
       <app-subject-list></app-subject-list>
     </div>
-    <div *ngIf="render[2]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[2]" class="sidenav-content-inner">
       <app-classroom-list></app-classroom-list>
     </div>
-    <div *ngIf="render[3]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[3]" class="sidenav-content-inner">
       <app-class-list></app-class-list>
     </div>
-    <div *ngIf="render[4]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[4]" class="sidenav-content-inner">
       <app-teacher-list></app-teacher-list>
     </div>
-    <div *ngIf="render[5]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[5]" class="sidenav-content-inner">
       <app-student-list></app-student-list>
     </div>
-    <div *ngIf="render[6]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[6]" class="sidenav-content-inner">
       <app-lesson-list></app-lesson-list>
     </div>
-    <div *ngIf="render[7]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[7]" class="sidenav-content-inner">
       <app-grade-list></app-grade-list>
     </div>
-    <div *ngIf="render[8]" class="sidenav-content-inner">
+    <div *ngIf="navService.render[8]" class="sidenav-content-inner">
       <app-test-list></app-test-list>
     </div>
   </div>

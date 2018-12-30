@@ -39,7 +39,7 @@ export class ClassListComponent implements OnInit {
   showStudents(clazz) {
     console.log(clazz)
   }
-
+n
   initialize() {
     this.clazzService.getAll().subscribe(data => {
       this.clazzes = data._embedded.clazzes;
