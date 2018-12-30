@@ -78,4 +78,12 @@ export class ClassListComponent implements OnInit {
       this.initialize()
     });
   }
+  applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.name.toLowerCase().includes(filter)
+        || data.teacher.name.toLowerCase().includes(filter)
+        || data.teacher.surname.toLowerCase().includes(filter)
+        || (data.teacher.name.toLowerCase() + ' ' + data.teacher.surname.toLowerCase()).includes(filter);
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

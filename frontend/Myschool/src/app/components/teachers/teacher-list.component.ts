@@ -114,6 +114,13 @@ export class TeacherListComponent implements OnInit {
     });
   }
   applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.name.toLowerCase().includes(filter)
+        || data.surname.toLowerCase().includes(filter)
+        || (data.name.toLowerCase() + ' ' + data.surname.toLowerCase()).includes(filter)
+        || data.salary.toString().includes(filter)
+        || data.subjects.some(sub => sub.name.toLowerCase().includes(filter))
+        || data.dateOfEmployment.includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

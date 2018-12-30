@@ -4,9 +4,9 @@ import {ClassroomAddDialog} from "./dialogs/add/classroom-add.component";
 import {ClassroomService} from "../../service/classroom/classroom.service";
 
 export interface PeriodicElement {
-  number: string;
+  number: number;
   href: string;
-  numberOfSeats: string;
+  numberOfSeats: number;
 }
 
 @Component({
@@ -67,6 +67,9 @@ export class ClassroomListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.number.toString().toLowerCase().includes(filter)
+        || data.numberOfSeats.toString().toLowerCase().includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -70,6 +70,15 @@ export class LessonListComponent implements OnInit {
 
 
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch(property) {
+          case 'subject': return item.subject.name;
+          case 'teacher': return item.teacher.name + ' ' + item.teacher.surname;
+          case 'classroom': return item.classroom.number;
+          case 'clazz': return item.clazz.name;
+          default: return item[property];
+        }
+      };
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
