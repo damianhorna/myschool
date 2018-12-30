@@ -60,5 +60,7 @@ export class TestListComponent implements OnInit {
       this.initialize()
     });
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

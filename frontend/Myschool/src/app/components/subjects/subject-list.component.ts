@@ -61,4 +61,9 @@ export class SubjectListComponent implements OnInit {
     });
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate =
+      (data: PeriodicElement, filter: string) => data.name.toLowerCase().includes(filter);
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

@@ -4,9 +4,9 @@ import {ClassroomAddDialog} from "./dialogs/add/classroom-add.component";
 import {ClassroomService} from "../../service/classroom/classroom.service";
 
 export interface PeriodicElement {
-  number: number;
+  number: string;
   href: string;
-  numberOfSeats: number;
+  numberOfSeats: string;
 }
 
 @Component({
@@ -37,7 +37,11 @@ export class ClassroomListComponent implements OnInit {
       this.classrooms = data._embedded.classrooms;
       this.ELEMENT_DATA = [];
       for (let i in this.classrooms) {
-        this.ELEMENT_DATA.push({number: this.classrooms[i].number, href: this.classrooms[i]._links.self.href, numberOfSeats: this.classrooms[i].numberOfSeats});
+        this.ELEMENT_DATA.push({
+          number: this.classrooms[i].number,
+          href: this.classrooms[i]._links.self.href,
+          numberOfSeats: this.classrooms[i].numberOfSeats
+        });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.sort = this.sort;
@@ -62,4 +66,7 @@ export class ClassroomListComponent implements OnInit {
     });
   }
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

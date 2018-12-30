@@ -113,5 +113,7 @@ export class TeacherListComponent implements OnInit {
       this.initialize()
     });
   }
-
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }
