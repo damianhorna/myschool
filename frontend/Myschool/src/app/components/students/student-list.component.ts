@@ -59,6 +59,12 @@ export class StudentListComponent implements OnInit {
         });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
+      this.dataSource.sortingDataAccessor = (item, property) => {
+        switch(property) {
+          case 'clazz': return item.clazz.name;
+          default: return item[property];
+        }
+      };
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
