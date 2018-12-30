@@ -43,6 +43,9 @@ import {TestListComponent} from './components/tests/test-list.component';
 import {TestAddDialog} from "./components/tests/dialogs/add/test-add.component";
 import {LessonUnitPipe} from './pipes/LessonUnitPipe';
 import {MembersListComponent} from './components/classes/members-list/members-list.component';
+import { AbsencesComponent } from './components/students/absences/absences.component';
+import { PresentStudentsComponent } from './components/lessons/present-students/present-students.component';
+import { GivenGradesComponent } from './components/lessons/given-grades/given-grades.component';
 
 
 @NgModule({
@@ -66,7 +69,10 @@ import {MembersListComponent} from './components/classes/members-list/members-li
     TestListComponent,
     TestAddDialog,
     LessonUnitPipe,
-    MembersListComponent
+    MembersListComponent,
+    AbsencesComponent,
+    PresentStudentsComponent,
+    GivenGradesComponent
   ],
   entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog],
   imports: [
