@@ -8,6 +8,7 @@ import {ClassroomService} from "../../service/classroom/classroom.service";
 import {SubjectService} from "../../service/subject/subject.service";
 import {TeacherService} from "../../service/teacher/teacher.service";
 import {LessonAddDialog} from "./dialogs/add/lesson-add.component";
+import {NavigationService} from "../../service/navigation/navigation.service";
 
 export interface PeriodicElement {
   href: string;
@@ -43,7 +44,8 @@ export class LessonListComponent implements OnInit {
               private subjectService: SubjectService,
               private teacherService: TeacherService,
               public dialog: MatDialog,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -71,12 +73,17 @@ export class LessonListComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.sortingDataAccessor = (item, property) => {
-        switch(property) {
-          case 'subject': return item.subject.name;
-          case 'teacher': return item.teacher.name + ' ' + item.teacher.surname;
-          case 'classroom': return item.classroom.number;
-          case 'clazz': return item.clazz.name;
-          default: return item[property];
+        switch (property) {
+          case 'subject':
+            return item.subject.name;
+          case 'teacher':
+            return item.teacher.name + ' ' + item.teacher.surname;
+          case 'classroom':
+            return item.classroom.number;
+          case 'clazz':
+            return item.clazz.name;
+          default:
+            return item[property];
         }
       };
       this.dataSource.sort = this.sort;
@@ -140,6 +147,14 @@ export class LessonListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.initialize()
     });
+  }
+
+  showPresentStudents(lesson) {
+    this.navigationService.activateScreen(11, lesson);
+  }
+
+  showGivenGrades(lesson) {
+    this.navigationService.activateScreen(12, lesson);
   }
 
   applyFilter(filterValue: string) {

@@ -23,7 +23,7 @@ export class NavigationService {
   constructor() {
   }
 
-  activateScreen(screenNumber) {
+  activateScreen(screenNumber, theObject? : any) {
     for (let i = 0; i < this.render.length; i++) {
       this.render[i] = false;
     }

@@ -4,6 +4,7 @@ import {ClazzService} from "../../service/clazz/clazz.service";
 import {StudentService} from "../../service/student/student.service";
 import {HttpClient} from "@angular/common/http";
 import {StudentAddDialog} from "./dialogs/add/student-add.component";
+import {NavigationService} from "../../service/navigation/navigation.service";
 
 export interface PeriodicElement {
   href: string;
@@ -33,7 +34,8 @@ export class StudentListComponent implements OnInit {
   constructor(private studentService: StudentService,
               private clazzService: ClazzService,
               public dialog: MatDialog,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private navigationService: NavigationService) {
   }
 
   ngOnInit() {
@@ -90,6 +92,10 @@ export class StudentListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.initialize()
     });
+  }
+
+  showAbsences(student){
+    this.navigationService.activateScreen(10, student);
   }
 
   applyFilter(filterValue: string) {

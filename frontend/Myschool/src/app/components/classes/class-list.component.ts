@@ -4,6 +4,7 @@ import {TeacherService} from "../../service/teacher/teacher.service";
 import {ClazzAddDialog} from "../classes/dialogs/add/clazz-add.component";
 import {ClazzService} from "../../service/clazz/clazz.service";
 import {HttpClient} from "@angular/common/http";
+import {NavigationService} from "../../service/navigation/navigation.service";
 
 export interface PeriodicElement {
   href: string;
@@ -29,7 +30,8 @@ export class ClassListComponent implements OnInit {
   constructor(private clazzService: ClazzService,
               public dialog: MatDialog,
               private teacherService: TeacherService,
-              private http: HttpClient) {
+              private http: HttpClient,
+              private navigationService : NavigationService) {
   }
 
   ngOnInit() {
@@ -37,9 +39,9 @@ export class ClassListComponent implements OnInit {
   }
 
   showStudents(clazz) {
-    console.log(clazz)
+    this.navigationService.activateScreen(9, clazz);
   }
-n
+
   initialize() {
     this.clazzService.getAll().subscribe(data => {
       this.clazzes = data._embedded.clazzes;
