@@ -4,6 +4,8 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class NavigationService {
+  targetObject : any;
+
   render: boolean[] = [
     true, //welcome
     false, //subjects
@@ -28,5 +30,6 @@ export class NavigationService {
       this.render[i] = false;
     }
     this.render[screenNumber] = true;
+    this.targetObject = theObject;
   }
 }
