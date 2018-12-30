@@ -29,7 +29,7 @@ export class LessonListComponent implements OnInit {
 
 
   ELEMENT_DATA: PeriodicElement[] = [];
-  displayedColumns: string[] = ['topic', 'date', 'classroom', 'clazz', 'subject', 'teacher', 'lessonUnit', 'actions'];
+  displayedColumns: string[] = ['topic', 'subject', 'teacher', 'classroom', 'clazz', 'date', 'lessonUnit', 'actions'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   lessons: any[];
 
@@ -116,7 +116,7 @@ export class LessonListComponent implements OnInit {
   openDialog(href, date, topic, lessonUnit, classroom, clazz, subject, teacher): void {
     console.log(href, date, topic, lessonUnit, classroom, clazz, subject, teacher)
     const dialogRef = this.dialog.open(LessonAddDialog, {
-      width: '250px',
+      width: '300px',
       data: {
         href: href,
         topic: topic,
