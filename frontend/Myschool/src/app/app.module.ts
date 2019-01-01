@@ -20,7 +20,8 @@ import {
   MatSidenavModule,
   MatSortModule,
   MatTableModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatCheckboxModule
 } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
@@ -99,7 +100,8 @@ import { GivenGradesComponent } from './components/lessons/given-grades/given-gr
     MatNativeDateModule,
     NgMultiSelectDropDownModule.forRoot(),
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

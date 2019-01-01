@@ -4,7 +4,8 @@ import {StudentService} from "../../../service/student/student.service";
 import {ClazzService} from "../../../service/clazz/clazz.service";
 import {HttpClient} from "@angular/common/http";
 import {NavigationService} from "../../../service/navigation/navigation.service";
-import {StudentAddDialog} from "../../students/dialogs/add/student-add.component";
+import {SelectionModel} from "@angular/cdk/collections";
+import {LessonService} from "../../../service/lesson/lesson.service";
 
 export interface PeriodicElement {
   href: string;
@@ -23,11 +24,14 @@ export class PresentStudentsComponent implements OnInit {
 
 
   ELEMENT_DATA: PeriodicElement[] = [];
-  displayedColumns: string[] = ['name', 'surname', 'dateOfBirth', 'clazz'];
+  displayedColumns: string[] = ['select', 'name', 'surname', 'dateOfBirth', 'clazz'];
   dataSource = new MatTableDataSource(this.ELEMENT_DATA);
   students: any[];
   lesson: any;
   navService: any;
+  initialSelection = [];
+  allowMultiSelect = true;
+  selection = new SelectionModel<PeriodicElement>(this.allowMultiSelect, this.initialSelection);
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,7 +40,8 @@ export class PresentStudentsComponent implements OnInit {
               private clazzService: ClazzService,
               public dialog: MatDialog,
               private http: HttpClient,
-              private navigationService: NavigationService) {
+              private navigationService: NavigationService,
+              private lessonService : LessonService) {
     this.lesson = navigationService.targetObject;
     this.navService = navigationService;
   }
@@ -61,13 +66,31 @@ export class PresentStudentsComponent implements OnInit {
           let res: any;
           res = data;
           this.ELEMENT_DATA[i].clazz = res;
+          if (i == (this.students.length - 1).toString()) {
+            let EL_DATA_COPY = [];
+            for (let element of this.ELEMENT_DATA) {
+              if (element.clazz.name == this.lesson.clazz.name) {
+                EL_DATA_COPY.push(element)
+                this.http.get("//localhost:8080/lessons/search/was-present?sid=" + element.href.substring(element.href.lastIndexOf("/")+1) + "&" + "lid=" + this.lesson.href.substring(this.lesson.href.lastIndexOf("/")+1))
+                  .subscribe(res => {
+                    if(res){
+                      this.initialSelection.push(element);
+                      this.selection = new SelectionModel<PeriodicElement>(this.allowMultiSelect, this.initialSelection);
+                    }
+                  }, err => console.log(err));
+              }
+            }
+            this.dataSource = new MatTableDataSource(EL_DATA_COPY);
+          }
         });
       }
       this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.sortingDataAccessor = (item, property) => {
-        switch(property) {
-          case 'clazz': return item.clazz.name;
-          default: return item[property];
+        switch (property) {
+          case 'clazz':
+            return item.clazz.name;
+          default:
+            return item[property];
         }
       };
       this.dataSource.sort = this.sort;
@@ -75,38 +98,25 @@ export class PresentStudentsComponent implements OnInit {
     });
   }
 
-  delete(href) {
-    this.studentService.remove(href).subscribe(result => {
-      this.initialize()
-    }, err => {
-      alert("Constraint violation exception. ")
-    });}
 
-  openDialog(href, name, surname, dateOfBirth, clazz): void {
-    const dialogRef = this.dialog.open(StudentAddDialog, {
-      width: '250px',
-      data: {
-        href: href,
-        name: name,
-        surname: surname,
-        dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : null,
-        clazz: clazz
-      }
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      this.initialize()
-    });
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected == numRows;
   }
 
-  showAbsences(student){
-    this.navigationService.activateScreen(10, student);
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filterPredicate =
-      (data: PeriodicElement, filter: string) => data.clazz.name.toLowerCase().includes(filter)
-        || data.dateOfBirth.toLowerCase().includes(filter)
-        || (data.name.toLowerCase() + ' ' + data.surname.toLowerCase()).includes(filter);
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  savePresentStudents(){
+    this.navService.activateScreen(6);
+    let selectedHrefs = [];
+    this.selection.selected.forEach(student => selectedHrefs.push(student.href));
+    this.lessonService.putPresentStudents(this.lesson.href, selectedHrefs).subscribe(res => console.log(res), err => console.log(err));
   }
 }

@@ -20,3 +20,7 @@ mat-paginator{
 .green-background{
   background-color: seagreen;
 }
+
+.mat-column-select {
+   overflow: initial;
+ }

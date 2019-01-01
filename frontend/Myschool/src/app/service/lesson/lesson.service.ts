@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
@@ -18,7 +18,7 @@ export class LessonService {
   }
 
   getAbsences(sid): Observable<any> {
-    return this.http.get(this.TEACHER_API + '/search/getAbsences?studentId='+sid)
+    return this.http.get(this.TEACHER_API + '/search/getAbsences?studentId=' + sid)
   }
 
   save(teacher): Observable<any> {
@@ -58,5 +58,19 @@ export class LessonService {
     console.log("put teacher", teacherHref)
     const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
     return this.http.put(lessonHref + '/teacher', teacherHref, {headers: headers});
+  }
+
+  putPresentStudents(lessonHref, presentStudentsHrefs) {
+    console.log(presentStudentsHrefs);
+    let body = "";
+    for (let href of presentStudentsHrefs) {
+      body += href + "\n";
+    }
+    const headers = new HttpHeaders().set('Content-Type', 'text/uri-list; charset=utf-8');
+    if (presentStudentsHrefs.length == 0) {
+      return this.http.put(lessonHref + '/presentStudents', null, {headers: headers});
+    } else {
+      return this.http.put(lessonHref + '/presentStudents', body, {headers: headers});
+    }
   }
 }

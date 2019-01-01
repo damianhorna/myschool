@@ -1,0 +1,9 @@
+CREATE DEFINER=`myschool`@`%` PROCEDURE `absences`(IN sid bigint(20))
+BEGIN
+	select distinct lesson.id, lesson.date, lesson.topic, lesson.classroom_id, lesson.class_id, lesson.subject_id, lesson.teacher_id, lesson.lesson_unit from (student join clazz on student.class_id = clazz.id) join lesson on student.class_id = lesson.class_id where lesson.id not in (select presence.lesson_id from student join presence where presence.student_id=sid) and student.id=sid;
+END
+
+CREATE DEFINER=`myschool`@`%` FUNCTION `was_present`(sid bigint(20), lid bigint(20)) RETURNS tinyint(1)
+BEGIN
+	return (select count(*) from presence where presence.student_id=sid and presence.lesson_id=lid);
+END
