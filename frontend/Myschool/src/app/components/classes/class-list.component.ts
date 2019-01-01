@@ -64,7 +64,9 @@ export class ClassListComponent implements OnInit {
   }
 
   delete(href) {
-    this.clazzService.remove(href).subscribe(res => this.initialize());
+    this.clazzService.remove(href).subscribe(res => this.initialize(), err => {
+      alert("Constraint violation exception. Change class of students that belong to this one and then remove it.")
+    });
   }
 
   openDialog(href, name, teacher): void {

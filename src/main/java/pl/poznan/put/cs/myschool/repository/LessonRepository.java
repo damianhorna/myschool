@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import pl.poznan.put.cs.myschool.model.Lesson;
 
 @RepositoryRestResource
-@CrossOrigin(origins="http://localhost:4200")
-public interface LessonRepository extends JpaRepository<Lesson, Long> {
+@CrossOrigin(origins = "http://localhost:4200")
+public interface LessonRepository extends JpaRepository<Lesson, Long>, CustomLessonRepository {
 }

@@ -8,6 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.List;
 
+
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "getAbsences"
+                , procedureName = "absences"
+                , parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, name = "studentId", type = Long.class)}
+                , resultClasses = Lesson.class)})
 @Data
 @Entity
 public class Lesson {
