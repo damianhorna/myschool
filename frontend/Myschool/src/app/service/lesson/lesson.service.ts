@@ -17,6 +17,10 @@ export class LessonService {
     return this.http.get(this.TEACHER_API)
   }
 
+  getAbsences(sid): Observable<any> {
+    return this.http.get(this.TEACHER_API + '/search/getAbsences?studentId='+sid)
+  }
+
   save(teacher): Observable<any> {
     let result: Observable<Object>;
     if (teacher['href']) {

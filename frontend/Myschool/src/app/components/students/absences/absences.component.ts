@@ -57,7 +57,8 @@ export class AbsencesComponent implements OnInit {
   }
 
   initialize() {
-    this.lessonService.getAll().subscribe(data => {
+    let sid = this.student.href.substring(this.student.href.lastIndexOf('/')+ 1);
+    this.lessonService.getAbsences(sid).subscribe(data => {
       this.lessons = data._embedded.lessons;
       this.ELEMENT_DATA = [];
       for (let i in this.lessons) {
