@@ -68,13 +68,13 @@ export class PresentStudentsComponent implements OnInit {
           this.ELEMENT_DATA[i].clazz = res;
           if (i == (this.students.length - 1).toString()) {
             let EL_DATA_COPY = [];
-            for (let element of this.ELEMENT_DATA) {
-              if (element.clazz.name == this.lesson.clazz.name) {
-                EL_DATA_COPY.push(element)
-                this.http.get("//localhost:8080/lessons/search/was-present?sid=" + element.href.substring(element.href.lastIndexOf("/")+1) + "&" + "lid=" + this.lesson.href.substring(this.lesson.href.lastIndexOf("/")+1))
+            for (let student of this.ELEMENT_DATA) {
+              if (student.clazz.name == this.lesson.clazz.name) {
+                EL_DATA_COPY.push(student)
+                this.http.get("//localhost:8080/lessons/search/was-present?sid=" + student.href.substring(student.href.lastIndexOf("/")+1) + "&" + "lid=" + this.lesson.href.substring(this.lesson.href.lastIndexOf("/")+1))
                   .subscribe(res => {
                     if(res){
-                      this.initialSelection.push(element);
+                      this.initialSelection.push(student);
                       this.selection = new SelectionModel<PeriodicElement>(this.allowMultiSelect, this.initialSelection);
                     }
                   }, err => console.log(err));
@@ -84,7 +84,6 @@ export class PresentStudentsComponent implements OnInit {
           }
         });
       }
-      this.dataSource = new MatTableDataSource(this.ELEMENT_DATA);
       this.dataSource.sortingDataAccessor = (item, property) => {
         switch (property) {
           case 'clazz':
