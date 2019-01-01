@@ -94,8 +94,9 @@ export class TeacherListComponent implements OnInit {
   delete(href) {
     this.teacherService.remove(href).subscribe(result => {
       this.initialize()
-    }, error => console.error(error));
-  }
+    }, err => {
+      alert("Constraint violation exception.")
+    });}
 
   openDialog(href, name, surname, dateOfEmployment, salary): void {
     const dialogRef = this.dialog.open(TeacherAddDialog, {

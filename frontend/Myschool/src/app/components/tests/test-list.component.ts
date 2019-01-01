@@ -47,7 +47,9 @@ export class TestListComponent implements OnInit {
   delete(href) {
     this.testService.remove(href).subscribe(result => {
       this.initialize()
-    }, error => console.error(error));
+    }, err => {
+      alert("Constraint violation exception. Delete grades that uses this type of test.")
+    });
   }
 
   openDialog(name, href): void {
@@ -60,6 +62,7 @@ export class TestListComponent implements OnInit {
       this.initialize()
     });
   }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

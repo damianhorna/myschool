@@ -126,8 +126,9 @@ export class LessonListComponent implements OnInit {
   delete(href) {
     this.lessonService.remove(href).subscribe(result => {
       this.initialize()
-    }, error => console.error(error));
-  }
+    }, err => {
+      alert("Constraint violation exception. ")
+    });}
 
   openDialog(href, date, topic, lessonUnit, classroom, clazz, subject, teacher): void {
     console.log(href, date, topic, lessonUnit, classroom, clazz, subject, teacher)

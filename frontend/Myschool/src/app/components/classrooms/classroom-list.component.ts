@@ -52,7 +52,9 @@ export class ClassroomListComponent implements OnInit {
   delete(href) {
     this.classroomService.remove(href).subscribe(result => {
       this.initialize()
-    }, error => console.error(error));
+    }, err => {
+      alert("Constraint violation exception. ")
+    });
   }
 
   openDialog(number, href, numberOfSeats): void {

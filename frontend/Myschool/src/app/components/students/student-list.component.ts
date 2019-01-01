@@ -75,8 +75,9 @@ export class StudentListComponent implements OnInit {
   delete(href) {
     this.studentService.remove(href).subscribe(result => {
       this.initialize()
-    }, error => console.error(error));
-  }
+    }, err => {
+      alert("Constraint violation exception. ")
+    });}
 
   openDialog(href, name, surname, dateOfBirth, clazz): void {
     const dialogRef = this.dialog.open(StudentAddDialog, {
