@@ -105,7 +105,7 @@ export class TeacherListComponent implements OnInit {
         href: href,
         name: name,
         surname: surname,
-        dateOfEmployment: new Date(dateOfEmployment),
+        dateOfEmployment: dateOfEmployment ? new Date(dateOfEmployment) : null,
         salary: salary,
         subjects: []
       }

@@ -40,13 +40,13 @@ export class TeacherAddDialog {
       this.error = true;
       this.errorMsg = 'teacher surname may not be empty';
       return false;
-    } else if (!this.validationService.isNumber(this.teacherData.salary)) {
-      this.error = true;
-      this.errorMsg = 'salary must be a positive number';
     } else if (this.teacherData.dateOfEmployment == null) {
       this.error = true;
       this.errorMsg = 'provide a date';
       return false;
+    } else if (!this.validationService.isNumber(this.teacherData.salary)) {
+      this.error = true;
+      this.errorMsg = 'salary must be a positive number';
     } else return true;
   }
 
