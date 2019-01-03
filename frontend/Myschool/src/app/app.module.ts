@@ -47,6 +47,7 @@ import {MembersListComponent} from './components/classes/members-list/members-li
 import { AbsencesComponent } from './components/students/absences/absences.component';
 import { PresentStudentsComponent } from './components/lessons/present-students/present-students.component';
 import { GivenGradesComponent } from './components/lessons/given-grades/given-grades.component';
+import {GradeAddDialog} from "./components/grades/dialogs/add/grade-add.component";
 
 
 @NgModule({
@@ -73,9 +74,10 @@ import { GivenGradesComponent } from './components/lessons/given-grades/given-gr
     MembersListComponent,
     AbsencesComponent,
     PresentStudentsComponent,
-    GivenGradesComponent
+    GivenGradesComponent,
+    GradeAddDialog
   ],
-  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog],
+  entryComponents: [SubjectAddDialog, ClassroomAddDialog, TeacherAddDialog, ClazzAddDialog, StudentAddDialog, LessonAddDialog, TestAddDialog, GradeAddDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,
