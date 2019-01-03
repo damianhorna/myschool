@@ -181,14 +181,13 @@ export class GradeListComponent implements OnInit {
   }
 
   openDialog(gradeData): void {
-    console.log(gradeData);
     const dialogRef = this.dialog.open(GradeAddDialog, {
       width: '300px',
       data: {
         ...gradeData,
         student: gradeData.student ? gradeData.student._links.self.href : '',
         lesson: gradeData.lesson ? gradeData.lesson._links.self.href : '',
-        test: gradeData.test ? gradeData.test._links.self.href: ''
+        test: gradeData.test ? gradeData.test._links.self.href : ''
       }
     });
     dialogRef.afterClosed().subscribe(result => {
@@ -205,13 +204,14 @@ export class GradeListComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
+    console.log(this.dataSource)
     this.dataSource.filterPredicate =
       (data: PeriodicElement, filter: string) => data.description.toLowerCase().includes(filter)
         || (data.student.name + ' ' + data.student.surname).toLowerCase().includes(filter)
         || (data.teacher.name + ' ' + data.teacher.surname).toLowerCase().includes(filter)
         || data.test.type.toLowerCase().includes(filter)
         || data.value.includes(filter)
-        || data.subject.name + ' (' + data.lesson.date + ', ' + data.lesson.lessonUnit + ', classroom ' + data.classroom.number + ')';
+        || (data.subject.name + ' (' + data.lesson.date + ', ' + data.lesson.lessonUnit + ', classroom ' + data.classroom.number.toString() + ')').toLowerCase().includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

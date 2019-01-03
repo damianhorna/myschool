@@ -9,6 +9,7 @@ import {SubjectService} from "../../service/subject/subject.service";
 import {TeacherService} from "../../service/teacher/teacher.service";
 import {LessonAddDialog} from "./dialogs/add/lesson-add.component";
 import {NavigationService} from "../../service/navigation/navigation.service";
+import {GradeAddDialog} from "../grades/dialogs/add/grade-add.component";
 
 export interface PeriodicElement {
   href: string;
@@ -128,7 +129,8 @@ export class LessonListComponent implements OnInit {
       this.initialize()
     }, err => {
       alert("Constraint violation exception. ")
-    });}
+    });
+  }
 
   openDialog(href, date, topic, lessonUnit, classroom, clazz, subject, teacher): void {
     console.log(href, date, topic, lessonUnit, classroom, clazz, subject, teacher)
@@ -167,5 +169,23 @@ export class LessonListComponent implements OnInit {
         || data.subject.name.toLowerCase().includes(filter)
         || data.clazz.name.toLowerCase().includes(filter);
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  addGrade(lesson) {
+    console.log(lesson.href);
+    const dialogRef = this.dialog.open(GradeAddDialog, {
+      width: '300px',
+      data: {
+        href: '',
+        student: '',
+        lesson: lesson.href,
+        test: '',
+        description: '',
+        value: ''
+      }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      this.initialize()
+    });
   }
 }

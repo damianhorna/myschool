@@ -57,17 +57,37 @@ export class GradeAddDialog {
       }
     });
 
-    this.http.get(this.gradeData.lesson + '/clazz').subscribe(res => {
-      let clazz: any = res;
-      this.http.get(clazz._links.students.href).subscribe(res => {
-        let st: any = res;
-        this.students = st._embedded.students;
+    if (this.gradeData.lesson) {
+      this.http.get(this.gradeData.lesson + '/clazz').subscribe(res => {
+        let clazz: any = res;
+        this.http.get(clazz._links.students.href).subscribe(res => {
+          let st: any = res;
+          this.students = st._embedded.students;
+        }, err => console.log(err));
       }, err => console.log(err));
-    }, err => console.log(err));
+
+      this.http.get(this.gradeData.lesson + '/teacher').subscribe(res => {
+        let teacher: any = res;
+        this.gradeData.teacher = teacher;
+      }, err => console.log(err));
+    } else {
+      this.gradeData = {
+        href: '',
+        description: '',
+        value: '',
+        lesson: '',
+        student: '',
+        teacher: '',
+        test: '',
+        subject: '',
+        classroom: ''
+      }
+    }
 
     testService.getAll().subscribe(res => {
       this.tests = res._embedded.tests;
     }, err => console.log(err));
+
 
   }
 
@@ -76,6 +96,7 @@ export class GradeAddDialog {
   }
 
   updateStudents(event) {
+    this.gradeData.student = '';
     this.http.get(event.value + '/clazz').subscribe(res => {
       let clazz: any = res;
       this.http.get(clazz._links.students.href).subscribe(res => {
@@ -91,9 +112,27 @@ export class GradeAddDialog {
   }
 
   validationSuccessful() {
+    console.log(this.gradeData);
     if (this.gradeData.description.match(/^\s*$/)) {
+      console.log("description empty")
       this.error = true;
-      this.errorMsg = 'topic may not be empty';
+      this.errorMsg = 'description may not be empty';
+      return false;
+    } else if (this.gradeData.value == '') {
+      this.error = true;
+      this.errorMsg = 'Provide grade value';
+      return false;
+    } else if (this.gradeData.lesson == '') {
+      this.error = true;
+      this.errorMsg = 'Provide lesson';
+      return false;
+    } else if (this.gradeData.student == '') {
+      this.error = true;
+      this.errorMsg = 'Provide student name';
+      return false;
+    } else if (this.gradeData.test == '') {
+      this.error = true;
+      this.errorMsg = 'Provide test type';
       return false;
     } else return true;
   }
@@ -103,7 +142,7 @@ export class GradeAddDialog {
     this.gradeService
       .save(this.gradeData)
       .subscribe(result => {
-        this.gradeData.href = result._links.self.href;
+          this.gradeData.href = result._links.self.href;
           this.gradeService.putLesson(this.gradeData.href, this.gradeData.lesson).subscribe(res => {
             this.gradeService.putTeacher(this.gradeData.href, this.gradeData.teacher._links.self.href).subscribe(res => {
               this.gradeService.putStudent(this.gradeData.href, this.gradeData.student).subscribe(res => {
@@ -119,7 +158,7 @@ export class GradeAddDialog {
         });
   }
 
-  addTeacher() {
+  addGrade() {
     this.error = false;
     if (this.validationSuccessful()) {
       this.saveGrade()
