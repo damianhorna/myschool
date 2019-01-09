@@ -176,7 +176,7 @@ export class GradeListComponent implements OnInit {
     this.gradeService.remove(href).subscribe(result => {
       this.initialize()
     }, err => {
-      alert("Constraint violation exception. ")
+      alert("Constraint violation exception.")
     });
   }
 

@@ -76,7 +76,7 @@ export class StudentListComponent implements OnInit {
     this.studentService.remove(href).subscribe(result => {
       this.initialize()
     }, err => {
-      alert("Constraint violation exception. ")
+      alert("Constraint violation exception. This student has been referenced in different table, eg. absences list.")
     });}
 
   openDialog(href, name, surname, dateOfBirth, clazz): void {

@@ -128,7 +128,7 @@ export class LessonListComponent implements OnInit {
     this.lessonService.remove(href).subscribe(result => {
       this.initialize()
     }, err => {
-      alert("Constraint violation exception. ")
+      alert("Constraint violation exception. Some of the grades should be deleted first.")
     });
   }
 

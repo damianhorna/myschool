@@ -95,7 +95,7 @@ export class TeacherListComponent implements OnInit {
     this.teacherService.remove(href).subscribe(result => {
       this.initialize()
     }, err => {
-      alert("Constraint violation exception.")
+      alert("Constraint violation exception. Cannot delete teacher that has some lessons he is referenced in.")
     });}
 
   openDialog(href, name, surname, dateOfEmployment, salary): void {

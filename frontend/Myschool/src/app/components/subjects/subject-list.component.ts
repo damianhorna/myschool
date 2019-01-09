@@ -48,7 +48,7 @@ export class SubjectListComponent implements OnInit {
     this.subjectService.remove(href).subscribe(result => {
       this.initialize()
     }, err => {
-      alert("Constraint violation exception.")
+      alert("Constraint violation exception. First delete lessons of this subject if you want to delete it.")
     });}
 
   openDialog(name, href): void {
